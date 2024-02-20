@@ -1,13 +1,16 @@
+// eslint-disable-next-line no-unused-vars
+import React, { useState } from "react"; // Import React
+import LoginPage from "./components/login";
 
-
-
-function App() {
-
+const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [token, setToken] = useState(null);
+  // const [userObject, setUserObject] = useState(null);
   return (
-    <h1>
-      Location Tracker
-    </h1>
-  )
-}
+    <div className="App">
+      <LoginPage loggedIn={loggedIn} token={token} setToken={setToken} setLoggedIn={setLoggedIn} />
+    </div>
+  );
+};
 
-export default App
+export default App;
