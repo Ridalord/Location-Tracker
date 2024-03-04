@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import classes from "./index.module.css"
 import { PropagateLoader } from "react-spinners";
 import PropTypes from "prop-types"
+import { useNavigate } from 'react-router-dom';
+
 
 
 const LoginForm = ({ onSignupClick, token, setLoggedIn }) => {
@@ -25,6 +27,8 @@ const LoginForm = ({ onSignupClick, token, setLoggedIn }) => {
     }
     
   }, [token]);
+  const navigate = useNavigate();
+
 
   const handleLogin = () => {
     // console.log('Logging in with:', email, password);
@@ -34,7 +38,7 @@ const LoginForm = ({ onSignupClick, token, setLoggedIn }) => {
     localStorage.setItem('rememberedEmail', email)
     localStorage.setItem('rememberedPassword', password)
     localStorage.setItem('rememberMe', rememberMe)
-    // navigate('/dashboard');
+    navigate('/dashboard');
     setLoading(!loading);
   };
 
@@ -103,7 +107,7 @@ LoginForm.propTypes = {
   token: PropTypes.string,
   setToken: PropTypes.func,
   loggedIn: PropTypes.bool,
-  setLoggedIn: PropTypes.func
+  setLoggedIn: PropTypes.func,
 }
 
 const SignupForm = ({ onLoginClick, setLoggedIn }) => {

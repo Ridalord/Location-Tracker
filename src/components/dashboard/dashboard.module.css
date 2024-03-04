@@ -1,0 +1,160 @@
+.main {
+  width: 80%;
+  right: 0;
+  background-color: #f8f9fa;
+  transition: width 1.2s ease-in-out !important;
+  height: 100svh;
+  position: absolute;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.main::-webkit-scrollbar {
+  width: 5px;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background-color: #525252;
+  border-radius: 10px;
+}
+.wrap {
+  position: relative;
+}
+/* .mainContainer, .content{
+  height: 100svh;
+  overflow-y: scroll;
+} */
+.content{
+  padding: 110px 20px 20px;
+}
+.activity,
+.pinsFile{
+  background-color: #fff !important;
+  padding: 20px 20px 30px;
+  box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.05);
+  border-radius: 4px;
+}
+.activity>span{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+}
+.activity>span>h3{
+  font-size: 14px;
+  font-weight: 500;
+  color: #48465b;
+}
+.data{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  row-gap: 5px;
+}
+.data>span:first-child{
+  color: #5d78ff !important;
+  font-weight: 700;
+  font-size: 20px;
+}
+.data>span:last-child{
+  color: #74788d;
+  font-size: 12px;
+  font-weight: 400;
+}
+.mainWrap{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.pinsFile{
+  display: flex;
+  width: 100% !important;
+  row-gap: 10px;
+  /* margin-top: 10px; */
+  flex-wrap: wrap;
+  grid-row: 2/3;
+  grid-column: 1/3;
+}
+.pinsFile>div{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 25px;
+  box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.06);
+  cursor: pointer;
+  width: 50%;
+}
+.pinsFile:hover{
+  box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.06);
+}
+.pinsFile>div>img{
+  width: 35px;
+  height: 35px;
+}
+.pinsFile>div>div{
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  text-align: left;
+  row-gap: 0;
+}
+.pinsFile>div>div>span:first-child{
+  font-size: 15px;
+  font-weight: 500;
+  color: #595d6e;
+}
+.pinsFile>div>div>span:last-child{
+  font-size: 13px;
+  color: #74788d;
+}
+.activity{
+  grid-row: 1/2;
+  grid-column: 1/2;
+}
+.third{
+  grid-row: 3/4;
+  grid-column: 1/2;
+}
+.fourth{
+  grid-row: 3/4;
+  grid-column: 2/3;
+}
+.fifth{
+  grid-row: 4/5;
+  grid-column: 1/2;
+}
+.sixth{
+  grid-row: 4/5;
+  grid-column: 2/3;
+}
+.footer{
+  background-color: #fff;
+  padding: 15px 20px;
+  color: #74788d;
+  font-size: 11px;
+  font-weight: 400;
+  text-align: left;
+}
+
+@media (max-width: 767px) {
+  .mainWrap{
+    grid-template-columns: 1fr !important;
+  }
+  .pinsFile{
+    grid-row: 2/3;
+    grid-column: 1/2;
+  }
+  .fourth {
+    grid-row: 4/5;
+    grid-column: 1/2;
+  }
+  .fifth{
+    grid-row: 5/6;
+    grid-column: 1/2;
+  }
+  .sixth{
+    grid-row: 6/7;
+    grid-column: 1/2;
+  }
+
+}
