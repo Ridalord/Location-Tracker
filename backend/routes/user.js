@@ -8,11 +8,6 @@ userRouter.post("/login", userController.loginUser);
 userRouter.get("/activation/:token", userController.activateUser); // to be used only in development(backend)
 userRouter.get("/logout", isAuthenticated, userController.logoutUser);
 userRouter.get("/:id", isAuthenticated, userController.getUserById);
-userRouter.put(
-  "/update-user-info",
-  isAuthenticated,
-  userController.updateUserInfo
-);
 userRouter.post(
   "/forgot-password",
   isAuthenticated,
