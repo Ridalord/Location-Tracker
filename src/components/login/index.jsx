@@ -50,6 +50,7 @@ const LoginForm = ({ onSignupClick, token, setLoggedIn }) => {
       <form className={classes.formWrap}>
         <div>
           <input
+            required
             type="email"
             id="email"
             value={email}
@@ -60,6 +61,7 @@ const LoginForm = ({ onSignupClick, token, setLoggedIn }) => {
         </div>
         <div>
           <input
+            required
             type="password"
             id="password"
             value={password}
@@ -138,6 +140,7 @@ const SignupForm = ({ onLoginClick, setLoggedIn }) => {
       <form className={classes.formWrap}>
         <div>
           <input
+            required
             type="text"
             id="firstName"
             value={firstName}
@@ -148,6 +151,7 @@ const SignupForm = ({ onLoginClick, setLoggedIn }) => {
         </div>
         <div>
           <input
+            required
             type="text"
             id="lastName"
             value={lastName}
@@ -158,6 +162,7 @@ const SignupForm = ({ onLoginClick, setLoggedIn }) => {
         </div>
         <div>
           <input
+            required
             type="text"
             id="country"
             value={country}
@@ -168,6 +173,7 @@ const SignupForm = ({ onLoginClick, setLoggedIn }) => {
         </div>
         <div>
           <input
+            required
             type="email"
             id="newEmail"
             value={email}
@@ -178,6 +184,7 @@ const SignupForm = ({ onLoginClick, setLoggedIn }) => {
         </div>
         <div>
           <input
+            required
             type="password"
             id="password"
             value={password}
