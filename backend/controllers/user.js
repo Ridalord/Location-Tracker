@@ -3,10 +3,6 @@ const User = require("../models/user");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/errorHandler");
 const sendToken = require("../utils/jwtToken");
-const sendMail = require("../utils/sendMail");
-
-
-const frontendUrl = "http://localhost:3000";
 
 // create user
 exports.createUser = async (req, res, next) => {
@@ -24,22 +20,19 @@ exports.createUser = async (req, res, next) => {
 
     const activationToken = createActivationToken(user);
 
-    const activationUrl = `${frontendUrl}/user/activation/${activationToken}`;
-
     try {
-        await sendMail({
-          email: user.email,
-          subject: "Activate your account",
-          message: `Hello ${user.name}, please click on the link to activate your account: ${activationUrl}`,
-        });
-  
-        res.status(201).json({
-          success: true,
-          message: `please check your email:- ${user.email} to activate your account!`,
-        });
-      } catch (error) {
-        return next(new ErrorHandler(error.message, 500));
-      }
+      res.status(201).json({
+        success: true,
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        activationToken,
+        message: "Account created successfully!",
+      });
+    } catch (error) {
+      console.log(error);
+      return next(new ErrorHandler(error.message, 500));
+    }
   } catch (error) {
     res.status(400).send(error.message);
   }
