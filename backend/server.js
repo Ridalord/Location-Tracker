@@ -15,7 +15,12 @@ process.on("uncaughtException", (err) => {
 const app = express();
 connectToMongoDB();
 
+// Routes
+const user = require("./routes/user");
+
 app.use(express.json());
+app.use("/api/user", user)
+
 
 app.get("/", (_, res) => {
   res.status(200).send("Hey there!");
