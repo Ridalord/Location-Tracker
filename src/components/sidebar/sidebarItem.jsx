@@ -51,7 +51,7 @@ const SidebarItem = ({ icon, url, name, dropdownItems, handleLinkClick }) => {
 };
 
 SidebarItem.propTypes = {
-  icon: PropTypes.string,
+  icon: PropTypes.object,
   url: PropTypes.string,
   name: PropTypes.string,
   dropdownItems: PropTypes.array,

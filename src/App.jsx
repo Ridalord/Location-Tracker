@@ -43,7 +43,7 @@ const App = () => {
           path="/dashboard/*"
           element={
             loggedIn ? (
-              <Dashboard userObject={userObject} token={token} setLoggedIn={setLoggedIn} setUserObject={setUserObject} />
+              <Dashboard loggedIn={loggedIn} userObject={userObject} token={token} setLoggedIn={setLoggedIn} setUserObject={setUserObject} />
             ) : (
               <Navigate to="/" replace={true} />
             )

@@ -6,9 +6,9 @@ import Main from "./main";
 import PropTypes from "prop-types";
 import Tracker from "./tracker/Tracker";
 
-const DashboardContainer = ({ toggleSidebar, sidebarVisible, userObject, setLoggedIn, setUserObject }) => {
+const DashboardContainer = ({ toggleSidebar, sidebarVisible, userObject, setLoggedIn, setUserObject, loggedIn }) => {
   const [activeComponent, setActiveComponent] = useState("dashboard");
-  const [userLocation, setUserLocation] = useState(null);
+  const [userLocation, setUserLocation] = useState({});
   const [footerYear, setFooterYear] = useState(new Date().getFullYear()); // Initialize with current year
 
   useEffect(() => {
@@ -18,7 +18,8 @@ const DashboardContainer = ({ toggleSidebar, sidebarVisible, userObject, setLogg
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const { latitude, longitude } = position.coords;
-            setUserLocation([latitude, longitude]);
+            const timestamp = new Date().getTime(); // Get current timestamp
+            setUserLocation({ latitude, longitude, timestamp }); // Include timestamp
           },
           (error) => {
             console.error('Error getting user location:', error);
@@ -29,7 +30,8 @@ const DashboardContainer = ({ toggleSidebar, sidebarVisible, userObject, setLogg
         const watchId = navigator.geolocation.watchPosition(
           (position) => {
             const { latitude, longitude } = position.coords;
-            setUserLocation([latitude, longitude]);
+            const timestamp = new Date().getTime(); // Get current timestamp
+            setUserLocation({ latitude, longitude, timestamp }); // Include timestamp
           },
           (error) => {
             console.error('Error getting user location:', error);
@@ -43,20 +45,29 @@ const DashboardContainer = ({ toggleSidebar, sidebarVisible, userObject, setLogg
       }
     };
 
-    getLocation();
-  }, []);
+     // Check if the user is logged in
+      getLocation();
+    
+  }, [loggedIn]);
 
   useEffect(() => {
-    if (userLocation) {
-      setUserObject((prevUserObject) => ({
-        ...prevUserObject,
-        locations: [
-          { latitude: userLocation[0], longitude: userLocation[1] },
-          ...(prevUserObject.locations || []).slice(0, 4),
-        ],
-      }));
+    if (userLocation.latitude && userLocation.longitude && userObject ) { // Check if user is logged in and user object exists
+      // Update userObject with the new location data if the number of locations is less than 5
+      if ((userObject.locations || []).length < 5) {
+        setUserObject((prevUserObject) => ({
+          ...prevUserObject,
+          locations: [
+            ...prevUserObject.locations || [],
+            {
+              latitude: userLocation.latitude,
+              longitude: userLocation.longitude,
+              timestamp: userLocation.timestamp
+            }
+          ],
+        }));
+      }
     }
-  }, [userLocation, setUserObject]);
+  }, [userLocation.latitude, userLocation.longitude]);
 
   // Update footer year when component mounts
   useEffect(() => {
@@ -91,10 +102,11 @@ DashboardContainer.propTypes = {
   userObject: PropTypes.object,
   token: PropTypes.string,
   setLoggedIn: PropTypes.func,
+  loggedIn: PropTypes.bool,
   setUserObject: PropTypes.func
 };
 
-const Dashboard = ({ userObject, token, setLoggedIn, setUserObject }) => {
+const Dashboard = ({ userObject, token, setLoggedIn, setUserObject,loggedIn }) => {
   const [sidebarVisible, setSidebarVisible] = useState(true);
 
   const toggleSidebar = () => {
@@ -103,7 +115,7 @@ const Dashboard = ({ userObject, token, setLoggedIn, setUserObject }) => {
 
   return (
     <div>
-      <DashboardContainer userObject={userObject} token={token} setLoggedIn={setLoggedIn} toggleSidebar={toggleSidebar} sidebarVisible={sidebarVisible} setUserObject={setUserObject} />
+      <DashboardContainer loggedIn={loggedIn} userObject={userObject} token={token} setLoggedIn={setLoggedIn} toggleSidebar={toggleSidebar} sidebarVisible={sidebarVisible} setUserObject={setUserObject} />
     </div>
   );
 };
@@ -112,6 +124,7 @@ Dashboard.propTypes = {
   userObject: PropTypes.object,
   token: PropTypes.string,
   setLoggedIn: PropTypes.func,
+  loggedIn: PropTypes.bool,
   setUserObject: PropTypes.func,
 };
 

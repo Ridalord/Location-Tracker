@@ -8,7 +8,7 @@ import MarkerClusterGroup from 'react-leaflet-cluster';
 const Tracker = ({ userLocation, userObject }) => {
   return (
     <div className={`d-flex ${classes.trackerWrap}`}>
-      <MapContainer center={userLocation} zoom={15} scrollWheelZoom={false}>
+      <MapContainer center={[userLocation.latitude, userLocation.longitude]} zoom={15} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -74,18 +74,6 @@ const Tracker = ({ userLocation, userObject }) => {
               <p>2 hours ago</p>
             </div>
           </div>
-          <div className={classes.locationItem}>
-            <div className={classes.details}>
-              <h4>Alaba</h4>
-              <div className={classes.points}>
-                <span>Longitude: 38434645477</span>
-                <span>Latitude: 95975697697</span>
-              </div>
-            </div>
-            <div>
-              <p>2 hours ago</p>
-            </div>
-          </div>
           
         </div>
       </div>
@@ -94,7 +82,7 @@ const Tracker = ({ userLocation, userObject }) => {
 };
 
 Tracker.propTypes = {
-  userLocation: PropTypes.array.isRequired,
+  userLocation: PropTypes.object.isRequired,
   userObject: PropTypes.object.isRequired
 };
 
