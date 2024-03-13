@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { DropdownSubmenu } from "react-bootstrap-submenu";
 import classes from "./sidebar.module.css"
+import PropTypes from "prop-types";
+import { propTypes } from "react-bootstrap/esm/Image";
+
 
 const SidebarItem = ({ icon, url, name, dropdownItems, handleLinkClick }) => {
   const handleClick = (event) => {
@@ -48,6 +51,14 @@ const SidebarItem = ({ icon, url, name, dropdownItems, handleLinkClick }) => {
   );
 };
 
+SidebarItem.propTypes = {
+  icon: PropTypes.string,
+  url: PropTypes.string,
+  name: PropTypes.string,
+  dropdownItems: PropTypes.array,
+  handleLinkClick: PropTypes.func
+}
+
 const SidebarItemDropdown = ({ name, dropdownItems }) => (
   <DropdownSubmenu title={`${name}`}>
     {dropdownItems.map((item, index) => (
@@ -63,5 +74,10 @@ const SidebarItemDropdown = ({ name, dropdownItems }) => (
     ))}
   </DropdownSubmenu>
 );
+
+SidebarItemDropdown.propTypes = {
+  name: PropTypes.string,
+  dropdownItems: PropTypes.array
+}
 
 export default SidebarItem;
