@@ -5,7 +5,6 @@ import { Dropdown } from "react-bootstrap";
 import { DropdownSubmenu } from "react-bootstrap-submenu";
 import classes from "./sidebar.module.css"
 import PropTypes from "prop-types";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 
 const SidebarItem = ({ icon, url, name, dropdownItems, handleLinkClick }) => {
