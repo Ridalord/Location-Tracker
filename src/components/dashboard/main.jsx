@@ -1,6 +1,6 @@
 
 import {useState, useEffect} from "react";
-import Select from "./select/select";
+// import Select from "./select/select";
 import classes from "./dashboard.module.css"
 import User from "./user.png"
 import File from "./folder.png"
@@ -22,7 +22,7 @@ const Main = ({ userObject }) => {
   return (
     <div className={ classes.mainContainer}>
       <div className={classes.mainWrap}>
-        <div className={`${classes.activity}`}>
+        {/* <div className={`${classes.activity}`}>
           <span>
             <h3>Company Activity</h3>
             <Select />
@@ -31,12 +31,12 @@ const Main = ({ userObject }) => {
             <span>0</span>
             <span>Total Doors Knocked</span>
           </div>
-        </div>
+        </div> */}
         <div className={classes.pinsFile}>
           <div>
             <img src={User} alt="User Icon" />
             <div>
-              <span>0 / 1500 Pins</span>
+              <span>Name</span>
               <span>Imported this month</span>
             </div>
           </div>

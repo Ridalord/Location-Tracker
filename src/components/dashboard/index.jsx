@@ -9,6 +9,7 @@ import Tracker from "./tracker/Tracker";
 const DashboardContainer = ({ toggleSidebar, sidebarVisible, userObject, setLoggedIn, setUserObject }) => {
   const [activeComponent, setActiveComponent] = useState("dashboard");
   const [userLocation, setUserLocation] = useState(null);
+  const [footerYear, setFooterYear] = useState(new Date().getFullYear()); // Initialize with current year
 
   useEffect(() => {
     const getLocation = () => {
@@ -57,6 +58,11 @@ const DashboardContainer = ({ toggleSidebar, sidebarVisible, userObject, setLogg
     }
   }, [userLocation, setUserObject]);
 
+  // Update footer year when component mounts
+  useEffect(() => {
+    setFooterYear(new Date().getFullYear());
+  }, []);
+
   const handleLinkClick = (component) => {
     toggleSidebar();
     setActiveComponent(component);
@@ -72,7 +78,7 @@ const DashboardContainer = ({ toggleSidebar, sidebarVisible, userObject, setLogg
           {activeComponent === "tracker" && <Tracker userLocation={userLocation} userObject={userObject} />}
         </div>
         <div className={classes.footer}>
-          2023 &copy; Lexarsmart
+          {footerYear} &copy; Zidio Development
         </div>
       </main>
     </div>
