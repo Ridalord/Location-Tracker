@@ -1,3 +1,40 @@
 .trackerWrap{
   height: 80vh;
+  display: grid;
+  grid-template-columns: 5fr 3fr;
+  gap: 15px;
 }
+
+.locationWrap>h2{
+  margin: 0 0 15px;
+}
+
+.locationContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.locationItem{
+  display: flex;
+  background-color: #1e1e2d;
+  color: #a2a3b7 !important;
+  padding: 10px 20px;
+  text-align: left;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.locationItem:hover {
+  background-color: #252535;
+}
+
+.details>h4{
+  margin: 0 0 10px;
+}
+
+.points{
+  display: flex;
+  flex-direction: column;
+}
+

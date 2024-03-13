@@ -7,7 +7,7 @@ import MarkerClusterGroup from 'react-leaflet-cluster';
 
 const Tracker = ({ userLocation, userObject }) => {
   return (
-    <div className={classes.trackerWrap}>
+    <div className={`d-flex ${classes.trackerWrap}`}>
       <MapContainer center={userLocation} zoom={15} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -23,6 +23,72 @@ const Tracker = ({ userLocation, userObject }) => {
           ))}
         </MarkerClusterGroup>
       </MapContainer>
+      <div className={classes.locationWrap}>
+        <h2>Locations</h2>
+        <div className={classes.locationContainer}>
+          <div className={classes.locationItem}>
+            <div className={classes.details}>
+              <h4>Alaba</h4>
+              <div className={classes.points}>
+                <span>Longitude: 38434645477</span>
+                <span>Latitude: 95975697697</span>
+              </div>
+            </div>
+            <div>
+              <p>2 hours ago</p>
+            </div>
+          </div>
+          <div className={classes.locationItem}>
+            <div className={classes.details}>
+              <h4>Alaba</h4>
+              <div className={classes.points}>
+                <span>Longitude: 38434645477</span>
+                <span>Latitude: 95975697697</span>
+              </div>
+            </div>
+            <div>
+              <p>2 hours ago</p>
+            </div>
+          </div>
+          <div className={classes.locationItem}>
+            <div className={classes.details}>
+              <h4>Alaba</h4>
+              <div className={classes.points}>
+                <span>Longitude: 38434645477</span>
+                <span>Latitude: 95975697697</span>
+              </div>
+            </div>
+            <div>
+              <p>2 hours ago</p>
+            </div>
+          </div>
+          <div className={classes.locationItem}>
+            <div className={classes.details}>
+              <h4>Alaba</h4>
+              <div className={classes.points}>
+                <span>Longitude: 38434645477</span>
+                <span>Latitude: 95975697697</span>
+              </div>
+            </div>
+            <div>
+              <p>2 hours ago</p>
+            </div>
+          </div>
+          <div className={classes.locationItem}>
+            <div className={classes.details}>
+              <h4>Alaba</h4>
+              <div className={classes.points}>
+                <span>Longitude: 38434645477</span>
+                <span>Latitude: 95975697697</span>
+              </div>
+            </div>
+            <div>
+              <p>2 hours ago</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
     </div>
   );
 };
