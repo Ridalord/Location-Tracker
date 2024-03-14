@@ -3,9 +3,10 @@ import "leaflet/dist/leaflet.css";
 import classes from "./Tracker.module.css";
 import PropTypes from "prop-types";
 import MarkerClusterGroup from 'react-leaflet-cluster';
-
+import LocationItem from './locationItem';
 
 const Tracker = ({ userLocation, userObject }) => {
+  console.log(userObject.locations)
   return (
     <div className={`d-flex ${classes.trackerWrap}`}>
       <MapContainer center={[userLocation.latitude, userLocation.longitude]} zoom={15} scrollWheelZoom={false}>
@@ -14,10 +15,10 @@ const Tracker = ({ userLocation, userObject }) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <MarkerClusterGroup>
-          {userObject.locations.map((location, index) => ( // Added parentheses to return the Marker components
+          {userObject.locations.map((location, index) => (
             <Marker key={index} position={[location.latitude, location.longitude]}>
               <Popup>
-                Location {index+1}.
+                Location {index + 1}.
               </Popup>
             </Marker>
           ))}
@@ -26,55 +27,9 @@ const Tracker = ({ userLocation, userObject }) => {
       <div className={classes.locationWrap}>
         <h2>Locations</h2>
         <div className={classes.locationContainer}>
-          <div className={classes.locationItem}>
-            <div className={classes.details}>
-              <h4>Alaba</h4>
-              <div className={classes.points}>
-                <span>Longitude: 38434645477</span>
-                <span>Latitude: 95975697697</span>
-              </div>
-            </div>
-            <div>
-              <p>2 hours ago</p>
-            </div>
-          </div>
-          <div className={classes.locationItem}>
-            <div className={classes.details}>
-              <h4>Alaba</h4>
-              <div className={classes.points}>
-                <span>Longitude: 38434645477</span>
-                <span>Latitude: 95975697697</span>
-              </div>
-            </div>
-            <div>
-              <p>2 hours ago</p>
-            </div>
-          </div>
-          <div className={classes.locationItem}>
-            <div className={classes.details}>
-              <h4>Alaba</h4>
-              <div className={classes.points}>
-                <span>Longitude: 38434645477</span>
-                <span>Latitude: 95975697697</span>
-              </div>
-            </div>
-            <div>
-              <p>2 hours ago</p>
-            </div>
-          </div>
-          <div className={classes.locationItem}>
-            <div className={classes.details}>
-              <h4>Alaba</h4>
-              <div className={classes.points}>
-                <span>Longitude: 38434645477</span>
-                <span>Latitude: 95975697697</span>
-              </div>
-            </div>
-            <div>
-              <p>2 hours ago</p>
-            </div>
-          </div>
-          
+          {userObject.locations.map((location, index) => (
+            <LocationItem key={index} location={location} />
+          ))}
         </div>
       </div>
     </div>
