@@ -116,6 +116,14 @@
   border-radius: 5px;
 }
 
+.error{
+  margin: -10px 0 10px;
+  color: red;
+  font-style: italic;
+  font-size: small;
+  text-align: left;
+}
+
 @media (max-width: 767px) {
   .logo{
     margin-top: 20px;

@@ -12,11 +12,14 @@ const LoginForm = ({ onSignupClick, token, setLoggedIn }) => {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [invalidCredentials, setInvalidCredentials] = useState(false);
 
 
   useEffect(() => {
     if (localStorage.getItem('rememberMe')==='true') {
-      // console.log('yes')
+      console.log('yes')
       setEmail(localStorage.getItem('rememberedEmail'))
       setPassword(localStorage.getItem('rememberedPassword'))
       setRememberMe(localStorage.getItem('rememberMe'))
@@ -32,17 +35,44 @@ const LoginForm = ({ onSignupClick, token, setLoggedIn }) => {
 
 
   const handleLogin = () => {
-    // console.log('Logging in with:', email, password);
-    // console.log('Remember Me:', rememberMe);
-    localStorage.setItem('rememberMe', rememberMe);
-    setLoggedIn(true);
-    localStorage.setItem('rememberedEmail', email)
-    localStorage.setItem('rememberedPassword', password)
-    localStorage.setItem('rememberMe', rememberMe)
-    navigate('/dashboard');
-    setLoading(!loading);
-  };
+    
+    let isValid = true;
 
+    // Validate email
+    if (!email) {
+      console.log("no email")
+      setEmailError('Email is required');
+      isValid = false;
+    } else {
+      setEmailError('');
+    }
+
+    // Validate password
+    if (!password) {
+      setPasswordError('Password is required');
+      isValid = false;
+    } else {
+      setPasswordError('');
+    }
+
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const user = users.find(user => user.email === email && user.password === password);
+    if (!user) {
+      setInvalidCredentials(true);
+      return;
+    }
+
+    if (isValid) {
+      localStorage.setItem('rememberMe', rememberMe);
+      setLoggedIn(true);
+      localStorage.setItem('rememberedEmail', email)
+      localStorage.setItem('rememberedPassword', password)
+      localStorage.setItem('rememberMe', rememberMe)
+      navigate('/dashboard');
+      setLoading(!loading);
+    }
+
+  }
   return (
     <div className={classes.container}>
       <div className={classes.logo}>
@@ -59,6 +89,7 @@ const LoginForm = ({ onSignupClick, token, setLoggedIn }) => {
             placeholder="Email"
             className={classes.input}
           />
+          {emailError && <p className={classes.error}>{emailError}</p>}
         </div>
         <div>
           <input
@@ -70,6 +101,8 @@ const LoginForm = ({ onSignupClick, token, setLoggedIn }) => {
             placeholder="Password"
             className={classes.input}
           />
+          {passwordError && <p className={classes.error}>{passwordError}</p>}
+          {invalidCredentials && <p className={classes.error}>Invalid email or password. Please try again.</p>}
         </div>
         <div className={classes.rememberMe}>
           <input
@@ -119,21 +152,82 @@ const SignupForm = ({ onLoginClick, setLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [country, setCountry] = useState('');
-  const [loading, setLoading]= useState(false)
+  const [loading, setLoading] = useState(false);
+  const [firstNameError, setFirstNameError] = useState('');
+  const [lastNameError, setLastNameError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [countryError, setCountryError] = useState('');
+  const [emailExists, setEmailExists] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSignup = () => {
-    console.log('Signing up with:', email, password);
+    let isValid = true;
+    
 
-    setLoading(!loading)
-    setFirstName('')
-    setLastname('')
-    setEmail('')
-    setPassword('')
-    setCountry('')
-    setLoggedIn(true);
-    navigate("/dashboard")
+    // Validate first name
+    if (!firstName) {
+      setFirstNameError('First name is required');
+      isValid = false;
+    } else {
+      setFirstNameError('');
+    }
+
+    // Validate last name
+    if (!lastName) {
+      setLastNameError('Last name is required');
+      isValid = false;
+    } else {
+      setLastNameError('');
+    }
+
+    // Validate email
+    if (!email) {
+      setEmailError('Email is required');
+      isValid = false;
+    } else {
+      setEmailError('');
+    }
+
+    // Validate password
+    if (!password) {
+      setPasswordError('Password is required');
+      isValid = false;
+    } else {
+      setPasswordError('');
+    }
+
+    // Validate country
+    if (!country) {
+      setCountryError('Country is required');
+      isValid = false;
+    } else {
+      setCountryError('');
+    }
+
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const userExists = users.some(user => user.email === email);
+    if (userExists) {
+      setEmailExists(true);
+      return;
+    }
+
+    const newUser = { firstName, lastName, email, password, country };
+    users.push(newUser);
+    localStorage.setItem('users', JSON.stringify(users));
+
+
+    if (isValid) {
+      setLoading(!loading);
+      setFirstName('');
+      setLastname('');
+      setEmail('');
+      setPassword('');
+      setCountry('');
+      setLoggedIn(true);
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -152,6 +246,7 @@ const SignupForm = ({ onLoginClick, setLoggedIn }) => {
             placeholder='First Name'
             className={classes.input}
           />
+          {firstNameError && <p className={classes.error}>{firstNameError}</p>}
         </div>
         <div>
           <input
@@ -163,6 +258,7 @@ const SignupForm = ({ onLoginClick, setLoggedIn }) => {
             placeholder='Last Name'
             className={classes.input}
           />
+          {lastNameError && <p className={classes.error}>{lastNameError}</p>}
         </div>
         <div>
           <input
@@ -174,6 +270,7 @@ const SignupForm = ({ onLoginClick, setLoggedIn }) => {
             placeholder='Country'
             className={classes.input}
           />
+          {countryError && <p className={classes.error}>{countryError}</p>}
         </div>
         <div>
           <input
@@ -185,6 +282,7 @@ const SignupForm = ({ onLoginClick, setLoggedIn }) => {
             placeholder='Email'
             className={classes.input}
           />
+          {emailError && <p className={classes.error}>{emailError}</p>}
         </div>
         <div>
           <input
@@ -196,6 +294,8 @@ const SignupForm = ({ onLoginClick, setLoggedIn }) => {
             placeholder='Password'
             className={classes.input}
           />
+          {passwordError && <p className={classes.error}>{passwordError}</p>}
+          {emailExists && <p className={classes.error}>Email already exists. Please use a different email.</p>}
         </div>
         <div>
           <button type="button" onClick={handleSignup} className={classes.button}>
