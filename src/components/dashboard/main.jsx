@@ -3,14 +3,14 @@ import {useState, useEffect} from "react";
 // import Select from "./select/select";
 import classes from "./dashboard.module.css"
 import User from "./user.png"
-import File from "./folder.png"
+// import File from "./folder.png"
 // import CardTemplate from "./cardTemplate/cardTemplate";
 import PropTypes from "prop-types"
 
 
 const Main = ({ userObject }) => {
-  const [,setFirstName] = useState(null);
-  const [,setLastname] = useState(null)
+  const [firstName,setFirstName] = useState(null);
+  const [lastName,setLastname] = useState(null)
 
   useEffect(() => {
     if (userObject) {
@@ -36,17 +36,19 @@ const Main = ({ userObject }) => {
           <div>
             <img src={User} alt="User Icon" />
             <div>
-              <span>Name</span>
-              <span>Imported this month</span>
+              <span>Name: {firstName + ' ' + lastName}</span>
+              <span>Email: {userObject.email}</span>
+              <span>Country: {userObject.country}</span>
+              {/* <span>Imported this month</span> */}
             </div>
           </div>
-          <div>
+          {/* <div>
             <img src={File} alt="User Icon" />
             <div>
               <span>0.00 GB / 1.00 GB</span>
               <span>File Storage Space</span>
             </div>
-          </div>
+          </div> */}
         </div>
         {/* <CardTemplate userObject={userObject} title="Most Doors Knocked" name={firstName + ' ' +lastName} className={classes.third} />
         <CardTemplate userObject={userObject} title="Top Sales Rep" name={firstName + ' ' + lastName} className={classes.fourth} />

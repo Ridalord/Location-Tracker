@@ -3,7 +3,7 @@ import classes from "./index.module.css"
 import { PropagateLoader } from "react-spinners";
 import PropTypes from "prop-types"
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import LoginImage from "./mobile.webp"
 
 
 
@@ -127,33 +127,13 @@ const SignupForm = ({ onLoginClick, setLoggedIn }) => {
     console.log('Signing up with:', email, password);
 
     setLoading(!loading)
-    axios.post('http://localhost:5000/api/user/signup', {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-      country: country,
-    })
-      .then(response => {
-        // Handle successful response (you may want to redirect or show a success message)
-        console.log('Signup successful:', response.data);
-        if (response.data.success) {
-          setLoading(!loading)
-          setFirstName('')
-          setLastname('')
-          setEmail('')
-          setPassword('')
-          setCountry('')
-          setLoggedIn(true);
-          navigate("/dashboard")
-        }
-        // <Navigate to="/dashboard" replace={true} />
-      })
-      .catch(error => {
-        // Handle error (you may want to show an error message to the user)
-        console.error('Signup error:', error);
-        setLoading(!loading)
-      });
+    setFirstName('')
+    setLastname('')
+    setEmail('')
+    setPassword('')
+    setCountry('')
+    setLoggedIn(true);
+    navigate("/dashboard")
   };
 
   return (
@@ -260,12 +240,19 @@ const LoginContainer = ({setLoggedIn, setToken, token, loggedIn}) => {
   }, [loggedIn]);
 
   return (
-    <div className={classes.wrap}>
-      {showLogin ? (
-        <LoginForm loggedIn={loggedIn} setToken={setToken} token={token} setLoggedIn={setLoggedIn} onSignupClick={handleSignupClick} />
-      ) : (
-          <SignupForm loggedIn={loggedIn} setLoggedIn={setLoggedIn} setToken={setToken} token={token} onLoginClick={handleLoginClick} />
-      )}
+    <div className={classes.backgroundWrap}>
+      <div className={classes.mainWrap}>
+        <div className={classes.wrap}>
+          {showLogin ? (
+            <LoginForm loggedIn={loggedIn} setToken={setToken} token={token} setLoggedIn={setLoggedIn} onSignupClick={handleSignupClick} />
+          ) : (
+            <SignupForm loggedIn={loggedIn} setLoggedIn={setLoggedIn} setToken={setToken} token={token} onLoginClick={handleLoginClick} />
+          )}
+        </div>
+        <div className={classes.loginImage}>
+          <img src={LoginImage} alt="Login Image" />
+        </div>
+      </div>
     </div>
   );
 };
