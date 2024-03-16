@@ -82,3 +82,8 @@ ul {
 .dropdown-submenu-container>.dropdown-menu>.dropdown-item {
   color: #a2a3b7 !important;
 }
+
+.leaflet-container{
+  height: 55vh;
+  z-index: 0;
+}

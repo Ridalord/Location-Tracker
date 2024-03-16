@@ -19,10 +19,7 @@
 .wrap {
   position: relative;
 }
-/* .mainContainer, .content{
-  height: 100svh;
-  overflow-y: scroll;
-} */
+
 .content{
   padding: 110px 0 20px 20px;
 }
@@ -141,21 +138,8 @@
   .mainWrap{
     grid-template-columns: 1fr !important;
   }
-  .pinsFile{
-    grid-row: 2/3;
-    grid-column: 1/2;
-  }
-  .fourth {
-    grid-row: 4/5;
-    grid-column: 1/2;
-  }
-  .fifth{
-    grid-row: 5/6;
-    grid-column: 1/2;
-  }
-  .sixth{
-    grid-row: 6/7;
-    grid-column: 1/2;
+  .content {
+    padding: 110px 20px 20px 20px;
   }
 
 }
