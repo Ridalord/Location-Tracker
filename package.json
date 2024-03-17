@@ -2,7 +2,7 @@
   "name": "location-tracker",
   "private": true,
   "proxy": "http://localhost:5000",
-  "homepage": "https://ridalord.github.io/locationTracker/",
+  "homepage": "https://ridalord.github.io/Location-Tracker/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
