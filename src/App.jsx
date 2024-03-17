@@ -8,10 +8,11 @@ import Dashboard from "./components/dashboard";
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
+
   const [userObject, setUserObject] = useState(() => {
-    // Retrieve userObject from local storage if available
-    const storedUserObject = localStorage.getItem('userObject');
-    return storedUserObject ? JSON.parse(storedUserObject) : {
+    const storedUserObject = localStorage.getItem("userObject");
+    const parsedUserObject = JSON.parse(storedUserObject);
+    return parsedUserObject || {
       "firstName": "Ridwan",
       "lastName": "Alabi",
       "email": "ridhwan.alabi@gmail.com",
@@ -26,11 +27,14 @@ const App = () => {
     };
   });
 
-  // Save userObject to local storage whenever it changes
   useEffect(() => {
-    localStorage.setItem('userObject', JSON.stringify(userObject));
-  }, [userObject]);
-
+    // Check if the user is logged in
+    if (loggedIn) {
+      const storedUserObject = localStorage.getItem("userObject");
+      const parsedUserObject = JSON.parse(storedUserObject);
+      setUserObject(parsedUserObject);
+    }
+  }, [loggedIn]);
   return (
     <div className="App">
       <Routes>

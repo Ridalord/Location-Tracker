@@ -57,6 +57,9 @@ const LoginForm = ({ onSignupClick, token, setLoggedIn }) => {
 
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const user = users.find(user => user.email === email && user.password === password);
+    const userIndex = users.findIndex(user => user.email === email);
+    localStorage.setItem("userIndex", userIndex)
+    localStorage.setItem("userObject", JSON.stringify(user))
     if (!user) {
       setInvalidCredentials(true);
       return;
@@ -216,7 +219,7 @@ const SignupForm = ({ onLoginClick, setLoggedIn }) => {
     const newUser = { firstName, lastName, email, password, country };
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
-
+    localStorage.setItem('userObject', JSON.stringify(newUser))
 
     if (isValid) {
       setLoading(!loading);

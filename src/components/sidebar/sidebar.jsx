@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+// import {useState, useEffect} from "react";
 import classes from "./sidebar.module.css"
 import { FaHome, FaMapMarked} from "react-icons/fa";
 import SidebarItem from "./sidebarItem";
@@ -6,19 +6,13 @@ import PropTypes from "prop-types"
 
 
 
-export default function Sidebar({ visible, onLinkClick, userObject }) {
-  const [userRole, setUserRole]=useState(null)
+export default function Sidebar({ visible, onLinkClick}) {
   const handleLinkClick = (event, component) => {
     event.preventDefault();
     onLinkClick(component);
   };
-  useEffect(() => {
-    if (userObject) {
-      console.log(userObject)
-      setUserRole(userObject.role);
-    }
-  }, [userObject]);
-  console.log(userRole)
+  
+  // console.log(userRole)
 
   const navItems = [
     { icon: <FaHome />, url: "/dashboard", name: "Dashboard" },

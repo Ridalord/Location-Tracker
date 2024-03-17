@@ -50,10 +50,15 @@ const DashboardContainer = ({ toggleSidebar, sidebarVisible, userObject, setLogg
     
   }, [loggedIn]);
 
+
   useEffect(() => {
     if (userLocation.latitude && userLocation.longitude && userObject ) { // Check if user is logged in and user object exists
       // Update userObject with the new location data if the number of locations is less than 5
-      if ((userObject.locations || []).length < 5) {
+      const users = JSON.parse(localStorage.getItem("users"))
+      const userIndex = users.findIndex(User => User.email === userObject.email);
+      const updateObject = users[userIndex] ;
+
+      if ((updateObject.locations || []).length < 5) {
         setUserObject((prevUserObject) => ({
           ...prevUserObject,
           locations: [
@@ -65,9 +70,27 @@ const DashboardContainer = ({ toggleSidebar, sidebarVisible, userObject, setLogg
             }
           ],
         }));
+        
       }
+      // localStorage.setItem("userObject", JSON.stringify(userObject))
     }
   }, [userLocation.latitude, userLocation.longitude]);
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+
+  useEffect(() => {
+    // localStorage.setItem('userObject', JSON.stringify(userObject));
+
+    const userIndex = users.findIndex(User => User.email === userObject.email);
+
+    // const userIndex = localStorage.getItem("userIndex")
+    if (userIndex !== -1) {
+      users[userIndex] = userObject;
+      console.log(users[userIndex])
+
+      // Save the updated array back to local storage
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+  }, [userObject, users]);
 
   // Update footer year when component mounts
   useEffect(() => {
