@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import classes from "./navbar.module.css";
 import ProfileImage from "./profileImage.jpg";
 import BackgroundImage from "./bg-1.jpg";
@@ -8,6 +8,8 @@ import Carlendar from "./calendar.png"
 import ShoopingBasket from "./shopping-basket.png"
 import CreditCard from "./credit-card.png"
 import Lifebuoy from "./lifebuoy.png"
+import PropTypes from "prop-types";
+
 
 const Navbar = ({ toggleSidebar, sidebarVisible, activeComponent, userObject, setLoggedIn }) => {
   const [isContainerVisible, setIsContainerVisible] = useState(false);
@@ -129,5 +131,13 @@ const Navbar = ({ toggleSidebar, sidebarVisible, activeComponent, userObject, se
     </div>
   );
 };
+
+Navbar.propTypes = {
+  toggleSidebar: PropTypes.func,
+  sidebarVisible: PropTypes.bool,
+  activeComponent: PropTypes.string,
+  userObject: PropTypes.object,
+  setLoggedIn: PropTypes.func
+}
 
 export default Navbar;
