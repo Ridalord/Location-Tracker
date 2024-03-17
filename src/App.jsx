@@ -3,10 +3,12 @@ import React, { useState, useEffect } from "react"; // Import React
 import LoginPage from "./components/login";
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Dashboard from "./components/dashboard";
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(()=>JSON.parse(localStorage.getItem('loggedIn'))||false);
   const [token, setToken] = useState(null);
 
   const [userObject, setUserObject] = useState(() => {
@@ -28,6 +30,7 @@ const App = () => {
   });
 
   useEffect(() => {
+    localStorage.setItem('loggedIn', JSON.stringify(loggedIn))
     // Check if the user is logged in
     if (loggedIn) {
       const storedUserObject = localStorage.getItem("userObject");
@@ -54,6 +57,7 @@ const App = () => {
           }
         />
       </Routes>
+      <toastContainer/>
     </div>
   );
 };

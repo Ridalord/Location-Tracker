@@ -8,7 +8,7 @@ import Carlendar from "./calendar.png"
 import ShoopingBasket from "./shopping-basket.png"
 import CreditCard from "./credit-card.png"
 import Lifebuoy from "./lifebuoy.png"
-
+import PropTypes from "prop-types";
 const Navbar = ({ toggleSidebar, sidebarVisible, activeComponent, userObject, setLoggedIn }) => {
   const [isContainerVisible, setIsContainerVisible] = useState(false);
   const [firstName, setFirstName] = useState(null);
@@ -129,5 +129,11 @@ const Navbar = ({ toggleSidebar, sidebarVisible, activeComponent, userObject, se
     </div>
   );
 };
-
+Navbar.propTypes={
+  toggleSide: PropTypes.func,
+  sidebarVisible: PropTypes.bool,
+  activeComponent:PropTypes.string,
+  userObject:Proptypes.object,
+  setLoggedIn:PropTypes.func
+};
 export default Navbar;

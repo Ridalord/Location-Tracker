@@ -4,7 +4,7 @@ import { PropagateLoader } from "react-spinners";
 import PropTypes from "prop-types"
 import { useNavigate } from 'react-router-dom';
 import LoginImage from "./mobile.webp"
-
+import {toast} from 'react-toastify';
 
 
 const LoginForm = ({ onSignupClick, token, setLoggedIn }) => {
@@ -71,6 +71,7 @@ const LoginForm = ({ onSignupClick, token, setLoggedIn }) => {
       localStorage.setItem('rememberedEmail', email)
       localStorage.setItem('rememberedPassword', password)
       localStorage.setItem('rememberMe', rememberMe)
+      toast.success("Login Successful")
       navigate('/dashboard');
       setLoading(!loading);
     }
@@ -223,6 +224,7 @@ const SignupForm = ({ onLoginClick, setLoggedIn }) => {
 
     if (isValid) {
       setLoading(!loading);
+      toast.success("Signup Successful");
       setFirstName('');
       setLastname('');
       setEmail('');

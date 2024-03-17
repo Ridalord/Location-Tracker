@@ -75,10 +75,11 @@ const DashboardContainer = ({ toggleSidebar, sidebarVisible, userObject, setLogg
       // localStorage.setItem("userObject", JSON.stringify(userObject))
     }
   }, [userLocation.latitude, userLocation.longitude]);
-  const users = JSON.parse(localStorage.getItem('users')) || [];
+  
 
   useEffect(() => {
     // localStorage.setItem('userObject', JSON.stringify(userObject));
+    const users= JSON.parse(localStorage.getItem('users')) ||[];
 
     const userIndex = users.findIndex(User => User.email === userObject.email);
 
@@ -90,7 +91,7 @@ const DashboardContainer = ({ toggleSidebar, sidebarVisible, userObject, setLogg
       // Save the updated array back to local storage
       localStorage.setItem('users', JSON.stringify(users));
     }
-  }, [userObject, users]);
+  }, [userObject]);
 
   // Update footer year when component mounts
   useEffect(() => {
